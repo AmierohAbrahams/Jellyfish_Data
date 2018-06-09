@@ -23,6 +23,11 @@ theme1 <- function(base_size = 10, base_family = "serif"){
     )
 }
 
+
+theme(text         = element_text(size=9, family="Arial"),
+      axis.title.x = element_text(family="Arial"),
+      axis.title.y = element_text(family= "Arial"))
+
 # Focusing or analysing each of the series separately
 # How does temp affect the growth rate of jellyfish polyps
 # Selected the final day of series  A
@@ -281,10 +286,13 @@ rate_cf <- ggplot(final_ABC, aes(x = temp, y = mean_R1)) +
   geom_point(aes(colour = series)) +
   # scale_colour_distiller(palette = "Spectral") +
   facet_wrap(~series, ncol = 3) +
-  labs(x = "Temperature (°C)", y = "Growth Rate")+
+  labs(x = "TEMPERATURE (°C)", y = "GROWTH RATE")+
   theme1()
 
-rate_cf
+rate_cf + theme(text         = element_text(size=9, family="Arial"),
+                axis.title.x = element_text(family="Arial"),
+                axis.title.y = element_text(family= "Arial"))
+
 # Interpretations of the graphs above -------------------------------------
 # Graph A grows slower than B and C
 # The optimal temperature growth is between 12 and 16 degrees and 22-24
@@ -297,10 +305,12 @@ mean_cf <- ggplot(final_ABC, aes(x = temp, y = mean_cum)) +
   geom_point(aes(colour = series)) +
   # scale_colour_distiller(palette = "Spectral") +
   facet_wrap(~series, ncol = 3) +
-  labs(x = "Temperature (°C)", y = "Cumulative number") +
+  labs(x = "TEMPERATURE (°C)", y = "CUMULATIVE NUMBER") +
   theme1()
-
-mean_cf
+CUMULATIVE
+mean_cf + theme(text         = element_text(size=9, family="Arial"),
+                axis.title.x = element_text(family="Arial"),
+                axis.title.y = element_text(family= "Arial"))
 _________________________________________________________________________________________________________________________________________
 
 
@@ -328,12 +338,15 @@ temp12 <- jelly %>%
 jelly_excludedCX <- jelly %>% 
   filter(Species == "Cf")
 
-ggplot(jelly_excludedCX, aes(x = Age, y = `Cum N`)) +
+NEW3 <- ggplot(jelly_excludedCX, aes(x = Age, y = `Cum N`)) +
   geom_line(aes(colour = Temp, group = Polyp), alpha = 0.5) +
   scale_colour_distiller(palette = "Spectral") +
   facet_wrap(~Series, ncol = 3) +
-  labs(x = "Age (Days)", y = "Cumulative number") +
+  labs(x = "AGE (DAYS)", y = "CUMULATIVE NUMBER") +
   theme1()
+NEW3 + theme(text         = element_text(size=9, family="Arial"),
+             axis.title.x = element_text(family="Arial"),
+             axis.title.y = element_text(family= "Arial"))
 
 # At low temp cummalative numbers were relativley low. As temperatures increase cummalative numbers increase
 # There are some outliers present which shows a constant increase in cummalative number-- This can be mentioned in the discussion
@@ -341,12 +354,16 @@ ggplot(jelly_excludedCX, aes(x = Age, y = `Cum N`)) +
 # over a 36 day period polyp number slighly increases but in series A we see  a steeper increase in cummalive number due to the longer period (Series A- 87days)
 # Series B and C- 36day period
 
-ggplot(jelly_excludedCX, aes(x = Age, y = `R 1`)) +
+NEW4 <- ggplot(jelly_excludedCX, aes(x = Age, y = `R 1`)) +
   geom_line(aes(colour = Temp, group = Polyp), alpha = 0.5) +
   scale_colour_distiller(palette = "Spectral") +
   facet_wrap(~Series, ncol = 3) +
-  labs(x = "Age (Days)", y = "R 1") +
+  labs(x = "AGE (DAYS)", y = "R 1") +
   theme1()
+NEW4 + theme(text         = element_text(size=9, family="Arial"),
+             axis.title.x = element_text(family="Arial"),
+             axis.title.y = element_text(family= "Arial"))
+
 
 # Polyps need optimal conditions to grow where previous graphs has shown that warmer temperatures result in optimal growth rates
 # from this graphs we see that polyps in colder temperature take longer for budding 
@@ -416,6 +433,7 @@ summary(try2)
 # are the means between two populations significantly different.
 aov(mean_R1 ~ series, data=final_ABC)
 
+######### THIS ONE
 summary(aov(mean_R1 ~ series, data=final_ABC))
 # Df   Sum Sq   Mean Sq F value  Pr(>F)   
 # series       2 0.005101 0.0025503   7.999 0.00327 **
